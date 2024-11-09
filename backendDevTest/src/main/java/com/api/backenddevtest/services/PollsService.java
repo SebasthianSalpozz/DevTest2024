@@ -37,7 +37,7 @@ public class PollsService {
         Polls polls = new Polls();
         polls.setName(pollsDto.getName());
         List<Options> options = new ArrayList<>();
-        System.out.println("value = "+ pollsDto.getOptionDtos().get(1).getName());
+        //System.out.println("value = "+ pollsDto.getOptionDtos().get(1).getName());
         for (OptionDto optionDto: pollsDto.getOptionDtos()){
             System.out.println("agg");
             Options option = new Options();
