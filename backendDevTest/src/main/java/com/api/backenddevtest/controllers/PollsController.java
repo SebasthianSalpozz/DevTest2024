@@ -1,5 +1,6 @@
 package com.api.backenddevtest.controllers;
 
+import com.api.backenddevtest.dtos.PollsDto;
 import com.api.backenddevtest.models.Polls;
 import com.api.backenddevtest.services.PollsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class PollsController {
     }
 
     @PostMapping
-    public Polls createPoll(@RequestBody Polls polls) {
-        return pollsService.createPoll(polls);
+    public Polls createPoll(@RequestBody PollsDto pollsDto) {
+        return pollsService.createPoll(pollsDto);
     }
 
     @PostMapping("/{id}/votes")

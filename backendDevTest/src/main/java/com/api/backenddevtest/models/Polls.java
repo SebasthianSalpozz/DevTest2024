@@ -1,12 +1,12 @@
 package com.api.backenddevtest.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +19,8 @@ public class Polls {
     private Long id;
 
     @Column
+    @NotEmpty
+    @Pattern(regexp = "/[A-Za-z0-9]+/g")
     private String name;
 
     @OneToMany(
@@ -26,5 +28,9 @@ public class Polls {
             fetch = FetchType.LAZY,
             mappedBy = "polls"
     )
-    private ArrayList<Options> options;
+    //@JoinColumn(
+    //        name = "nameOptional",
+    //        referencedColumnName = "name"
+    //)
+    private List<Options> options = new ArrayList<Options>();
 }
