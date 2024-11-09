@@ -27,13 +27,6 @@ public class PollsService {
 
     public Polls createPoll(PollsDto pollsDto) {
         System.out.println("entrando1");
-        /*for(Options options: polls.getOptions()) {
-            System.out.println("names: "+options.getName());
-            //options.setPolls(polls);
-            repositoryOptions.save(options);
-            options.setPolls(polls);
-        }*/
-        //return repositoryPolls.save(polls);
         Polls polls = new Polls();
         polls.setName(pollsDto.getName());
         List<Options> options = new ArrayList<>();
@@ -49,8 +42,6 @@ public class PollsService {
         return repositoryPolls.save(polls);
     }
 
-
-
     public Polls vote(Long pollId, Long OptionId){
         Optional<Polls> pollsOptional = repositoryPolls.findById(pollId);
         if(!pollsOptional.isPresent()) {
@@ -65,6 +56,4 @@ public class PollsService {
         repositoryOptions.save(options);
         return pollsOptional.get();
     }
-
-
 }
