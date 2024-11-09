@@ -12,5 +12,5 @@ import java.util.List;
 public class PollsDto {
     private String name;
 
-    private List<OptionDto> optionDtos= new ArrayList<>();
+    private List<OptionDto> optionDtos = new ArrayList<>();
 }
