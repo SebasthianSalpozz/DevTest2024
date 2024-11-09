@@ -1,5 +1,7 @@
 package com.api.backenddevtest.services;
 
+import com.api.backenddevtest.dtos.OptionDto;
+import com.api.backenddevtest.dtos.PollsDto;
 import com.api.backenddevtest.models.Options;
 import com.api.backenddevtest.models.Polls;
 import com.api.backenddevtest.repositories.IRepositoryOptions;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,12 +25,32 @@ public class PollsService {
         return (ArrayList<Polls>) repositoryPolls.findAll();
     }
 
-    public Polls createPoll(Polls polls) {
-        for(Options options: polls.getOptions()) {
+    public Polls createPoll(PollsDto pollsDto) {
+        System.out.println("entrando1");
+        /*for(Options options: polls.getOptions()) {
+            System.out.println("names: "+options.getName());
+            //options.setPolls(polls);
+            repositoryOptions.save(options);
             options.setPolls(polls);
+        }*/
+        //return repositoryPolls.save(polls);
+        Polls polls = new Polls();
+        polls.setName(pollsDto.getName());
+
+        List<Options> options = new ArrayList<>();
+        System.out.println("value = "+ pollsDto.getOptionDtos().toString());
+        for (OptionDto optionDto: pollsDto.getOptionDtos()){
+            System.out.println("agg");
+            Options option = new Options();
+            option.setName(optionDto.getName());
+            option.setPolls(polls);
+            options.add(option);
         }
+        polls.setOptions(options);
         return repositoryPolls.save(polls);
     }
+
+
 
     public Polls vote(Long pollId, Long OptionId){
         Optional<Polls> pollsOptional = repositoryPolls.findById(pollId);

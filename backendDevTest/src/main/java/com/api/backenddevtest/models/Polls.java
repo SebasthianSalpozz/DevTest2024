@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,8 +24,12 @@ public class Polls {
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "polls"
     )
-    private ArrayList<Options> options;
+    //@JoinColumn(
+    //        name = "nameOptional",
+    //        referencedColumnName = "name"
+    //)
+    private List<Options> options = new ArrayList<Options>();
 }
